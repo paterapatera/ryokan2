@@ -1,6 +1,19 @@
 # For more information: https://laravel.com/docs/sail
 version: '3'
 services:
+    backend:
+        build:
+            context: ./backend
+        image: ryokan2/backend
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-3000}:3000'
+        volumes:
+            - .:/app
+            - backend-node_modules:/app/backend/node_modules
+            - pnpm-store:/app/.pnpm-store
+        command: "pnpm start:dev"
     main:
         build:
             context: ./main
@@ -86,6 +99,7 @@ services:
 #             - sail
 volumes:
     main-node_modules:
+    backend-node_modules:
     pnpm-store:
 #     sail-mysql:
 #         driver: local

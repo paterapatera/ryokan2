@@ -4,7 +4,7 @@ ARG GID
 
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
-WORKDIR /app/main
+WORKDIR /app/backend
 
 RUN pnpm config set store-dir /app/.pnpm-store
 COPY pnpm-lock.yaml .
@@ -13,4 +13,4 @@ COPY package.json .
 RUN pnpm install -r --offline
 
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["npx", "start:prod"]
