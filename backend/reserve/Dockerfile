@@ -1,10 +1,8 @@
 FROM node:latest
 
-ARG GID
-
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
-WORKDIR /app/backend
+WORKDIR /app/backend/reserve
 
 RUN pnpm config set store-dir /app/.pnpm-store
 COPY pnpm-lock.yaml .
